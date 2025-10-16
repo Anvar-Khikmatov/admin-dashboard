@@ -18,20 +18,20 @@
 body{
     width: 100vw;
     height: 100vh;
-    display: grid;
-    grid-template-rows: 20% 1fr;
-    grid-template-columns: minmax(200px, 20%) 1fr;
     overflow-x: hidden;
+    display: grid; 
+    grid-template-columns: minmax(200px, 20%) 1fr;  
+    grid-template-rows: clamp(100px, 9vw, 200px) 1fr;
 }
 
-.header{
+
+/* .header{
     display: flex;
     justify-content: center;
     align-items: center;
     grid-column: 2 / -1;
     grid-row: 1 / 2;
     box-shadow:  0 1px 8px 1px  rgb(180, 179, 179);
-    
 }
 
 .sidebar{
@@ -39,14 +39,49 @@ body{
     grid-column: 1 / span 1;
     grid-row: 1 / -1;
     padding-left: 6%;
+    min-height: 100%; 
 }
 
 .article{
     background-color: var(--article-color);
     grid-column: 2 / -1;
-    grid-row: 2 / -1;
-    z-index: -1;    
+    grid-row: 2 / -1;    
+} */
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2 / -1;
+    grid-row: 1 / 2;
+    box-shadow: 0 1px 8px 1px rgb(180, 179, 179);
+    margin-left: -1%;
+    z-index: 1;
 }
+
+
+.sidebar {
+    background-color: var(--side-color); 
+    grid-column: 1 / span 1;
+    grid-row: 1 / -1;
+    padding-left: 1.5%;
+    min-height: 100%;
+    position: fixed;
+    width: clamp(200px, 20%, 300px); 
+    height: 100vh;
+    overflow-y: auto; 
+    z-index: 1;
+}
+
+.article {
+    background-color: var(--article-color);
+    grid-column: 2 / -1;
+    grid-row: 2 / -1;
+    margin-left: -1%;
+} 
+
+
 
 
 .view-dashboard{
@@ -73,7 +108,7 @@ body{
     margin-top: 14%;
     margin-right: 4%;
     color: var(--side-text-color);
-    font-size: clamp(0.9rem, 1.4vw, 1.7rem);
+    font-size: clamp(0.9rem, 1.2vw, 1.7rem);
     font-weight: 400;
     line-height: 6vh;
     display: flex;
@@ -143,7 +178,7 @@ body{
 
 .searchbar input{
     width: 100%;
-    height: 100%;
+    height: clamp(13px, 2vw, 35px); 
     background-color: var(--article-color);
     border-radius: 30px;
     border: none;
@@ -238,7 +273,7 @@ input[type="text"] {
 }
 
 .main-name{
-    font-size: clamp(0.9rem, 1rem + 1.5vw, 1.7rem);
+    font-size: clamp(0.9rem, 1.5vw, 1.7rem);
     font-weight: 700;
 }
 
@@ -263,37 +298,172 @@ input[type="text"] {
 
                                                     /* Article */
 .article-wrapper{
+    background-color: --var(--article-color);
     display: grid;
-    min-height: 100%;
+    height: 100%;
     width: 100%;
     grid-template-columns: 70% 30%;
-    grid-template-rows: clamp(55px, 5vw, 80px) 1fr;
-    /* overflow: visible; */
-      
+    grid-template-rows:  1fr;
 }
 
-.article-intro{
-    grid-column: 1 / -1;
+.project, .announcement{
+    display: grid;
+    grid-template-rows: 4vw 1fr;
 }
 
-.project{
-    min-height: 100%;
-    background-color: aqua;
-    display: grid; 
-    grid-template-rows: repeat(3, 200px);
-    grid-template-columns: repeat(2, 400px); 
-    justify-content: center;
-    align-content: center;
+
+
+.your-project{
+    display: flex;
+    align-items: flex-end;
+    padding: 0.5vw 1.2vw;
+    font-size: clamp(0.7rem, 1.2vw, 1.4rem);
+    font-weight: bold;
+}
+
+.items{
+    display: grid;
+    width: 100%;
+    height: 100%;
     gap: 2vw;
-    padding: 1vw 0;
-    /* overflow: auto; */
-}
-
-.announcement{
-    min-height: 100px;
-    background-color: aquamarine;
+    padding-left: 1.2vw;
+    padding-bottom: 3vw;  
+    grid-template-columns: repeat(2, clamp(200px, 25vw, 28vw) );
+    grid-template-rows: repeat(3, clamp(150px, 13vw, 15vw));
 }
 
 .item{
-    background-color: red;
+    background-color: rgb(255, 255, 255);
+    padding: 1vw;
+    display: grid;
+    grid-template-rows: 20% 1fr 20%;
+    border-radius: 8px;
+    border-left: 0.5vw solid orange;
+    box-shadow: 5px 5px 8px  rgb(172, 172, 172);
+}
+
+.item-title{
+    font-size: clamp(0.7rem, 1.1vw, 1.4rem);
+    font-weight: bold;
+}
+
+.item-context{
+    overflow: auto;
+    scrollbar-width: none;
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+    color: rgb(120, 120, 120);
+}
+
+.item-links{
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+    gap: 1vw; 
+    margin-top: 1vw;
+}
+
+.icon{
+    width: auto;
+    height: clamp(1rem, 1.3vw, 1.7rem)
+}
+.icon:hover{ 
+    cursor: pointer;
+}
+
+
+.your-announcements{
+    font-size: clamp(0.7rem, 1.2vw, 1.4rem);
+    font-weight: bold;
+    padding: 0.5vw 0;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.an-items{
+    background-color: white;
+    height: clamp(200px, 20vw, 21vw);
+    width: clamp(180px, 21vw, 21vw);
+    padding-right: 2.2vw;
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    overflow: auto;
+    scrollbar-width: none;
+    gap: 1vh;
+    border-radius: 8px;
+    box-shadow: 5px 5px 8px  rgb(172, 172, 172);
+}
+
+.aside-title{
+    font-size: clamp(0.7rem, 1.1vw, 1.4rem);
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.aside-context{
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+    color: rgb(120, 120, 120);  
+    margin-bottom: auto;
+}
+
+.aside-breaker{
+    border: 1px solid rgb(183, 182, 182);
+}
+
+.trending{
+    font-size: clamp(0.7rem, 1.2vw, 1.4rem);
+    font-weight: bold;
+    padding: 2vw 0 0.4vw 0;
+    
+}
+
+.trending-items{
+    height: clamp(200px, 19vw, 19vw);
+    width: clamp(180px, 21vw, 21vw);
+    padding: 1vw;
+    background-color: white;
+    overflow: auto;
+    scrollbar-width: none;
+    border-radius: 8px;
+    box-shadow: 5px 5px 8px  rgb(172, 172, 172);
+}
+
+.trend-rows{
+    height: 25%;
+    display: flex;
+}
+
+.trend-svg{
+    width: auto;
+    height: 100%;
+    fill: rgb(255, 115, 0);
+}
+
+.trend-names{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+.trend-username{
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+    font-weight: bold;
+}
+
+.trend-name{
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+    color: rgb(120, 120, 120);  
+}
+
+
+
+
+@media screen and (max-width: 850px) {
+    .items{
+        grid-template-columns: clamp(290px, 25vw, 28vw);
+        grid-template-rows: repeat(6, clamp(150px, 13vw, 15vw));
+    }
 }
